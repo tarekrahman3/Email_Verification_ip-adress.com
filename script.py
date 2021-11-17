@@ -14,26 +14,27 @@ o=[]
 try:
 	for index, email in enumerate(emails):
 		try:
-			WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, '//input[@name="email"]')))
+			WebDriverWait(driver, 40).until(EC.presence_of_element_located((By.XPATH, '//input[@name="email"]')))
 			driver.find_element(By.XPATH,'//input[@name="email"]').clear()
 			driver.find_element(By.XPATH,'//input[@name="email"]').send_keys(email)
 			driver.execute_script("document.getElementsByTagName('button')[1].click()")
-			time.sleep(2)
-			WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, '//*[@id="result"]/p')))
+			WebDriverWait(driver, 40).until(EC.presence_of_element_located((By.XPATH, '//*[@id="result"]/p')))
 			result = driver.find_element(By.XPATH,'//*[@id="result"]/p').text
 			driver.execute_script("document.getElementsByTagName('summary')[0].click()")
 			details = driver.find_element(By.XPATH,'//pre').text
-			print(index,result,details)
+			print(f"{index} || {result}")
 			o.append({
 				'email':email,
 				'result':result,
-				'details':details
+				'details':details,
+				'is_valid':re.sub(r'.+ is ','',result)
 				})
 		except:
 			o.append({
 				'email':email,
 				'result':None,
-				'details':None
+				'details':None,
+				'is_valid':None
 				})
 finally:
 	pd.DataFrame(o).to_csv('results.csv')
