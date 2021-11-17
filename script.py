@@ -6,6 +6,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import pandas as pd
+import re
 emails = pd.read_csv('import.csv').emails.tolist()
 driver = uc.Chrome()
 time.sleep(3)
