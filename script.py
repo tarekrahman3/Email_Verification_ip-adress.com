@@ -22,7 +22,7 @@ try:
 			result = driver.find_element(By.XPATH,'//*[@id="result"]/p').text
 			driver.execute_script("document.getElementsByTagName('summary')[0].click()")
 			details = driver.find_element(By.XPATH,'//pre').text
-			print(f"{index} || {result}")
+			print(f"{index} | {email} | {re.sub(r'.+ is ','',result)}")
 			o.append({
 				'email':email,
 				'result':result,
