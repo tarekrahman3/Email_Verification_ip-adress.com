@@ -37,4 +37,4 @@ try:
 				'is_valid':None
 				})
 finally:
-	pd.DataFrame(o).to_csv('results.csv')
+	pd.DataFrame(o).to_csv('results.csv',index=False)
