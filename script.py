@@ -26,16 +26,16 @@ try:
 			print(f"{index} | {email} | {re.sub(r'.+ is ','',result)}")
 			o.append({
 				'email':email,
+				'is_valid':re.sub(r'.+ is ','',result),
 				'result':result,
 				'details':details,
-				'is_valid':re.sub(r'.+ is ','',result)
 				})
 		except:
 			o.append({
 				'email':email,
+				'is_valid':None,
 				'result':None,
 				'details':None,
-				'is_valid':None
 				})
 finally:
 	pd.DataFrame(o).to_csv('results.csv',index=False)
