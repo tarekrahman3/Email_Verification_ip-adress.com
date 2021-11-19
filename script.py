@@ -14,6 +14,9 @@ driver.get('https://www.ip-adress.com/verify-email-address')
 o=[]
 try:
 	for index, email in enumerate(emails):
+		if index%50==0:
+			print("backup csv created")
+			pd.DataFrame(o).to_csv('backup.csv',index=False)
 		try:
 			WebDriverWait(driver, 40).until(EC.presence_of_element_located((By.XPATH, '//input[@name="email"]')))
 			driver.find_element(By.XPATH,'//input[@name="email"]').clear()
